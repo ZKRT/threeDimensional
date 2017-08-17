@@ -4,6 +4,6 @@
 #include "sys.h"
 
 void TIM_Init(void);
-
+void Vedio_IO_Init(void);
 #endif 
 

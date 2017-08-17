@@ -28,10 +28,13 @@ void TIM_Init(void)
   GPIO_InitStructure.GPIO_OType = GPIO_OType_PP;
   GPIO_InitStructure.GPIO_PuPd = GPIO_PuPd_UP;
   
-	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_15 | GPIO_Pin_3 | GPIO_Pin_2 | GPIO_Pin_1;//PWM3_T2C1！！PWM6_T2C4！！PWM7_T2C3！！PWM8_T2C2
-	GPIO_Init(GPIOA, &GPIO_InitStructure);
+//	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_15 | GPIO_Pin_3 | GPIO_Pin_2 | GPIO_Pin_1;//PWM3_T2C1！！PWM6_T2C4！！PWM7_T2C3！！PWM8_T2C2
+//	GPIO_Init(GPIOA, &GPIO_InitStructure);
 	
-	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_5 | GPIO_Pin_4 | GPIO_Pin_1 | GPIO_Pin_0;//PWM1_T3C2！！PWM2_T3C1！！PWM4_T3C4！！PWM5_T3C3
+//	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_5 | GPIO_Pin_4 | GPIO_Pin_1 | GPIO_Pin_0;//PWM1_T3C2！！PWM2_T3C1！！PWM4_T3C4！！PWM5_T3C3
+//	GPIO_Init(GPIOB, &GPIO_InitStructure);
+	
+	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_5;//PWM1_T3C2
 	GPIO_Init(GPIOB, &GPIO_InitStructure);
 
   GPIO_PinAFConfig(GPIOB, GPIO_PinSource5, GPIO_AF_1);
@@ -44,8 +47,8 @@ void TIM_Init(void)
 //	GPIO_PinAFConfig(GPIOA, GPIO_PinSource1, GPIO_AF_2);
 	
   /* TIM3 clock enable */
-  RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM2 | RCC_APB1Periph_TIM3, ENABLE);
-  
+//  RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM2 | RCC_APB1Periph_TIM3, ENABLE);
+  RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM3, ENABLE);
   /* Time Base configuration */
   TIM_TimeBaseStructure.TIM_Prescaler = 48-1; 
   TIM_TimeBaseStructure.TIM_CounterMode = TIM_CounterMode_Up;
@@ -71,4 +74,25 @@ void TIM_Init(void)
 
 //	TIM_Cmd(TIM2, ENABLE); //modify by yanly
 	TIM_Cmd(TIM3, ENABLE);
+}
+
+void Vedio_IO_Init(void)
+{
+  GPIO_InitTypeDef  GPIO_InitStructure;
+
+  RCC_AHBPeriphClockCmd(RCC_AHBPeriph_GPIOA | RCC_AHBPeriph_GPIOB, ENABLE);
+
+  GPIO_InitStructure.GPIO_Mode = GPIO_Mode_OUT;
+  GPIO_InitStructure.GPIO_OType = GPIO_OType_PP;
+  GPIO_InitStructure.GPIO_Speed = GPIO_Speed_Level_3;
+  GPIO_InitStructure.GPIO_PuPd = GPIO_PuPd_UP;
+  
+	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_4;
+	GPIO_Init(GPIOB, &GPIO_InitStructure);
+	GPIO_ResetBits(GPIOB, GPIO_Pin_4);
+	
+	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_15;
+	GPIO_Init(GPIOA, &GPIO_InitStructure);
+	GPIO_ResetBits(GPIOA,GPIO_Pin_15);
+	delay_ms(200);	
 }

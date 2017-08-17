@@ -15,8 +15,8 @@
 #define _TIM_RETURN  500
 
 //PWM1_T3C2，对应PB5  //三维吊舱拍照
-//PWM2_T3C1，对应PB4
-//PWM3_T2C1，对应PA15
+//PWM2_T3C1，对应PB4  //IO 吊舱电源控制
+//PWM3_T2C1，对应PA15 //IO 吊舱镜头控制
 //PWM4_T3C4，对应PB1
 //PWM5_T3C3，对应PB0
 //PWM6_T2C4，对应PA3
@@ -28,6 +28,8 @@
 
 void sub_camera_zkrt_recv_decode_and_zkrt_encode_ack(void);
 void action_paizhao(uint8_t mode);
+void action_vedio_pwr_ctrl(uint8_t mode);
+void action_camera_ctrl(uint8_t mode);
 
 extern uint8_t camera_ack_flag;
 #endif

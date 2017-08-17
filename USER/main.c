@@ -15,6 +15,7 @@ void bsp_init(void)
 	ADC1_Init();
 	CAN_Mode_Init(CAN_Mode_Normal);//CAN初始化环回模式,波特率1Mbps    	
 	TIM_Init();
+	Vedio_IO_Init();
 }
 
 uint8_t status_camera[8] = {0XAA, 0XBB, 0XCC, 0XDD, 0XEE, DEVICE_TYPE_3DMODELING, 0X00, 0X00};
